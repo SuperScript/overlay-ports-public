@@ -1,6 +1,6 @@
-TIMESTAMP = 1714317143
-SHA256 (superscript-st-0.9.1_2-0d832c87_GH0.tar.gz) = 3d9f835ec74264c829e7c98933dcb225a742068d56249bba4e9e3d4b4de0222c
-SIZE (superscript-st-0.9.1_2-0d832c87_GH0.tar.gz) = 46206
+TIMESTAMP = 1714317258
+SHA256 (superscript-st-0.9.1_2-8914df6_GH0.tar.gz) = e771f5daf2dbe65d6932d8616d536dff474d3a6ecaef4f061c991d8917bd61f2
+SIZE (superscript-st-0.9.1_2-8914df6_GH0.tar.gz) = 46220
 SHA256 (st-scrollback-20210507-4536f46.diff) = 19d8f4e7fd0d1933dc6fcf6c7333db08e1b40fc75795464660c4d723eb62511c
 SIZE (st-scrollback-20210507-4536f46.diff) = 8916
 SHA256 (st-scrollback-mouse-20191024-a2c479c.diff) = 319458d980195d18fa0f81a6898d58f8d046c5ff982ab872d741f54bb60e267d
