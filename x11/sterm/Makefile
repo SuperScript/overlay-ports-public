@@ -1,5 +1,5 @@
 PORTNAME=	sterm
-DISTVERSION=	0.9.1_1
+DISTVERSION=	0.9.1_2
 
 USE_GITHUB=	yes
 GH_ACCOUNT=     superscript
