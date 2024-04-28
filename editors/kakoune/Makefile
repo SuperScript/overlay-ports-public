@@ -37,7 +37,7 @@ PATCH_DIST_STRIP=	-p1
 
 post-patch:
 	@${REINPLACE_CMD} -e '/-O3/d' \
-		${WRKSRC}/Makefile
+		${WRKSRC:H}/Makefile
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
