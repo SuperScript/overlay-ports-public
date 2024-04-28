@@ -1,5 +1,5 @@
 PORTNAME=	kakoune
-DISTVERSION=	sst_1
+DISTVERSION=	0.1
 CATEGORIES=	editors
 
 USE_GITHUB=	yes
