@@ -16,7 +16,7 @@ LICENSE_FILE=	${WRKSRC:H}/UNLICENSE
 
 RUN_DEPENDS=	setsid:sysutils/setsid
 
-USES=		compiler:c++20-lang gmake tar:bzip2
+USES=		compiler:c++20-lang tar:bzip2
 DATADIR=	${PREFIX}/share/kak
 DOCSDIR=	${PREFIX}/share/doc/kak
 PATCH_WRKSRC=	${WRKSRC:H}
