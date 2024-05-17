@@ -1,5 +1,5 @@
 PORTNAME=	kakoune
-PORTVERSION=	2024.04.30.1
+PORTVERSION=	2024.04.30_2
 CATEGORIES=	editors
 
 USE_GITHUB=	yes
@@ -7,7 +7,7 @@ GH_ACCOUNT=     mawww
 GH_PROJECT=     kakoune
 GH_TAGNAME=     e8ad943
 
-MAINTAINER=	ashish@FreeBSD.org
+MAINTAINER=	web+freebsd@superscript.com
 COMMENT=	Modal code editor with a focus on interactivity
 WWW=		https://kakoune.org
 

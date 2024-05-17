@@ -1,5 +1,5 @@
 PORTNAME=	sterm
-DISTVERSION=	0.9.1_2
+DISTVERSION=	0.9.1_3
 
 USE_GITHUB=	yes
 GH_ACCOUNT=     superscript
@@ -9,7 +9,7 @@ GH_TAGNAME=     8914df6
 CATEGORIES=	x11
 DISTNAME=	st-${PORTVERSION}
 
-MAINTAINER=	pkubaj@FreeBSD.org
+MAINTAINER=	web+freebsd@superscript.com
 COMMENT=	Simple X terminal
 WWW=		https://st.suckless.org/
 
