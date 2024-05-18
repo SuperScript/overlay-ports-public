@@ -1,7 +1,7 @@
 # Created by: Christer Edwards <christer.edwards@gmail.com>
 
 PORTNAME=	bastille
-PORTVERSION=	0.10.20231125_1
+DISTVERSION=	0.10.20231125_1
 CATEGORIES=	sysutils
 
 MAINTAINER=	web+freebsd@superscript.com

@@ -43,6 +43,16 @@ SCROLLBACK_PATCHFILES=	st-scrollback-0.8.5.diff:-p1 \
 XRESOURCES_PATCH_SITES=	https://st.suckless.org/patches/xresources/
 XRESOURCES_PATCHFILES=	st-xresources-20200604-9ba7ecf.diff:-p1
 
+.if defined(PORT_OPTIONS:MSCROLLBACK)
+PATCH_SITES+= ${SCROLLBACK_PATCH_SITES}
+PATCHFILES+= ${SCROLLBACK_PATCHFILES}
+.endif
+
+.if defined(PORT_OPTIONS:MXRESOURCES)
+PATCH_SITES+= ${XRESOURCES_PATCH_SITES}
+PATCHFILES+= ${XRESOURCES_PATCHFILES}
+.endif
+
 pre-everything::
 	@${ECHO_MSG} "You can build st with your own config.h using the ST_CONF knob:"
 	@${ECHO_MSG} "make ST_CONF=/path/to/st/config.h install clean"
