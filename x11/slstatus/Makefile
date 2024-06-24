@@ -20,7 +20,7 @@ LIB_DEPENDS=	libsndio.so:audio/sndio
 USES=		xorg
 USE_XORG=	x11
 
-PLIST_FILES=	slstatus
+PLIST_FILES=	bin/slstatus share/man/man1/slstatus.1.gz
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/slstatus ${STAGEDIR}${PREFIX}/bin
