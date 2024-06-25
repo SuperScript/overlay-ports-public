@@ -1,11 +1,11 @@
 PORTNAME=	slstatus
 DISTVERSION=	1.0
-PORTREVISION=   2
+PORTREVISION=   3
 
 USE_GITHUB=	yes
 GH_ACCOUNT=     superscript
 GH_PROJECT=     slstatus
-GH_TAGNAME=     5ffc275
+GH_TAGNAME=     5d89778
 
 CATEGORIES=	x11
 MAINTAINER=	freebsd@superscript.com
