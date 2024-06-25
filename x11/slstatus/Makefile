@@ -1,6 +1,6 @@
 PORTNAME=	slstatus
 DISTVERSION=	1.0
-PORTREVISION=   1
+PORTREVISION=   2
 
 USE_GITHUB=	yes
 GH_ACCOUNT=     superscript
