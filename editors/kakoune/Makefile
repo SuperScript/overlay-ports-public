@@ -1,25 +1,22 @@
 PORTNAME=	kakoune
-DISTVERSION=	2024.04.30_2
+DISTVERSION=	2024.05.18
 CATEGORIES=	editors
+MASTER_SITES=	https://github.com/mawww/kakoune/releases/download/v${DISTVERSION}/
 
-USE_GITHUB=	yes
-GH_ACCOUNT=     mawww
-GH_PROJECT=     kakoune
-GH_TAGNAME=     e8ad943
-
-MAINTAINER=	web+freebsd@superscript.com
+MAINTAINER=	ashish@FreeBSD.org
 COMMENT=	Modal code editor with a focus on interactivity
 WWW=		https://kakoune.org
 
 LICENSE=	UNLICENSE
-LICENSE_FILE=	${WRKSRC}/UNLICENSE
+LICENSE_FILE=	${WRKSRC:H}/UNLICENSE
 
 RUN_DEPENDS=	setsid:sysutils/setsid
 
-USES=		compiler:c++20-lang tar:bzip2
+USES=		compiler:c++20-lang gmake tar:bzip2
 DATADIR=	${PREFIX}/share/kak
 DOCSDIR=	${PREFIX}/share/doc/kak
-PATCH_WRKSRC=	${WRKSRC}
+PATCH_WRKSRC=	${WRKSRC:H}
+WRKSRC_SUBDIR=	src
 
 OPTIONS_DEFINE=	DEBUG DOCS
 
@@ -42,6 +39,6 @@ post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
 
 do-test:
-	@cd ${WRKSRC}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
+	@cd ${WRKSRC:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
 
 .include <bsd.port.post.mk>
