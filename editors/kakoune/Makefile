@@ -33,12 +33,12 @@ PATCH_DIST_STRIP=	-p1
 
 post-patch:
 	@${REINPLACE_CMD} -e '/-O3/d' \
-		${WRKSRC}/Makefile
+		${WRKDIR}/Makefile
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
 
 do-test:
-	@cd ${WRKSRC:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
+	@cd ${WRKDIR:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
 
 .include <bsd.port.post.mk>
