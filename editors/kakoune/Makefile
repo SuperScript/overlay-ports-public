@@ -15,8 +15,7 @@ RUN_DEPENDS=	setsid:sysutils/setsid
 USES=		compiler:c++20-lang gmake tar:bzip2
 DATADIR=	${PREFIX}/share/kak
 DOCSDIR=	${PREFIX}/share/doc/kak
-PATCH_WRKSRC=	${WRKSRC:H}
-WRKSRC_SUBDIR=	src
+PATCH_WRKSRC=	${WRKSRC:H}/src
 
 OPTIONS_DEFINE=	DEBUG DOCS
 
@@ -33,12 +32,12 @@ PATCH_DIST_STRIP=	-p1
 
 post-patch:
 	@${REINPLACE_CMD} -e '/-O3/d' \
-		${WRKDIR}/Makefile
+		${PATCH_WRKSRC}/Makefile
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
 
 do-test:
-	@cd ${WRKDIR:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
+	@cd ${WRKSRC:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
 
 .include <bsd.port.post.mk>
