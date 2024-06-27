@@ -15,8 +15,12 @@ RUN_DEPENDS=	setsid:sysutils/setsid
 USES=		compiler:c++20-lang gmake tar:bzip2
 DATADIR=	${PREFIX}/share/kak
 DOCSDIR=	${PREFIX}/share/doc/kak
-PATCH_WRKSRC=	${WRKSRC:H}
+
 WRKSRC_SUBDIR=	src
+PATCH_WRKSRC=	${WRKSRC:H}
+BUILD_WRKSRC=	${WRKSRC:H}
+INSTALL_WRKSRC=	${WRKSRC:H}
+TEST_WRKSRC=	${WRKSRC:H}
 
 OPTIONS_DEFINE=	DEBUG DOCS
 
@@ -31,17 +35,14 @@ PATCH_SITES=	https://github.com/mawww/kakoune/commit/
 PATCH_DIST_STRIP=	-p1
 .endif
 
-do-build:
-	cd ${WRKSRC:H} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS} ${MAKE_FLAGS} ${MAKEFILE} ${ALL_TARGET}
-
 post-patch:
 	@${REINPLACE_CMD} -e '/-O3/d' \
-		${WRKSRC:H}/Makefile
+		${PATCH_WRKSRC}/Makefile
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
 
 do-test:
-	@cd ${WRKSRC:H}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
+	@cd ${TEST_WRKSRC}/test && ${SETENV} LC_ALL=en_US.UTF-8 ./run
 
 .include <bsd.port.post.mk>
