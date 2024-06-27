@@ -32,7 +32,7 @@ PATCH_DIST_STRIP=	-p1
 .endif
 
 do-build:
-        cd ${WRKSRC:H} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS} ${MAKE_FLAGS} ${MAKEFILE} ${ALL_TARGET}
+	cd ${WRKSRC:H} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${_MAKE_JOBS} ${MAKE_FLAGS} ${MAKEFILE} ${ALL_TARGET}
 
 post-patch:
 	@${REINPLACE_CMD} -e '/-O3/d' \
