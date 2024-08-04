@@ -1,6 +1,4 @@
-TIMESTAMP = 1722454569
-SHA256 (monkslc-hyperpolyglot-v20240731_1-a55a3b5_GH0.tar.gz) = 6cd32aef63a7b957c427a75d6ff41d9ae0ac8ed197c674551ccf1c6b7c60f70c
-SIZE (monkslc-hyperpolyglot-v20240731_1-a55a3b5_GH0.tar.gz) = 6830602
+TIMESTAMP = 1722783559
 SHA256 (rust/crates/aho-corasick-0.7.10.crate) = 8716408b8bc624ed7f65d223ddb9ac2d044c0547b6fa4b0d554f3a9540496ada
 SIZE (rust/crates/aho-corasick-0.7.10.crate) = 111039
 SHA256 (rust/crates/ansi_term-0.11.0.crate) = ee49baf6cb617b853aa8d93bf420db2383fab46d314482ca2803b40d5fde979b
