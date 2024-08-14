@@ -1,10 +1,13 @@
 PORTNAME=	kakoune
 DISTVERSION=	2024.05.18
-PORTREVISION=   1
+PORTREVISION=   2
 CATEGORIES=	editors
-MASTER_SITES=	https://github.com/mawww/kakoune/releases/download/v${DISTVERSION}/
 
-MAINTAINER=	ashish@FreeBSD.org
+USE_GITHUB=     yes
+GH_ACCOUNT=     superscript
+GH_TAGNAME=     d7a7d0f
+
+MAINTAINER=	freebsd@superscript.com
 COMMENT=	Modal code editor with a focus on interactivity
 WWW=		https://kakoune.org
 
@@ -29,16 +32,6 @@ DEBUG_MAKE_ARGS=	debug=yes
 DEBUG_MAKE_ARGS_OFF=	debug=no
 
 .include <bsd.port.pre.mk>
-
-.if ${OSVERSION} > 1302506
-PATCHFILES=	344d31f42b8ced12626d4f87a22ffa5a671668fd.patch
-PATCH_SITES=	https://github.com/mawww/kakoune/commit/
-PATCH_DIST_STRIP=	-p1
-.endif
-
-post-patch:
-	@${REINPLACE_CMD} -e '/-O3/d' \
-		${PATCH_WRKSRC}/Makefile
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/kak
