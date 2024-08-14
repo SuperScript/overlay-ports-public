@@ -5,6 +5,7 @@ CATEGORIES=	editors
 
 USE_GITHUB=     yes
 GH_ACCOUNT=     superscript
+GH_PROJECT=     kakoune
 GH_TAGNAME=     d7a7d0f
 
 MAINTAINER=	freebsd@superscript.com
