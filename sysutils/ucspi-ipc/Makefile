@@ -5,7 +5,7 @@ DISTVERSIONPREFIX=	v
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.superscript.com/ucspi-ipc/
 
-MAINTAINER=	lx@redundancy.redundancy.org
+MAINTAINER=	freebsd@superscript.com
 COMMENT=	UCSPI tools for building local-domain client-server applications
 
 USE_GITHUB=	yes
