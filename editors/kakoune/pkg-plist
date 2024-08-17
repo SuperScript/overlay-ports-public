@@ -82,6 +82,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/gentoo-linux.kak
 %%DATADIR%%/rc/filetype/git.kak
 %%DATADIR%%/rc/filetype/github.kak
+%%DATADIR%%/rc/filetype/gleam.kak
 %%DATADIR%%/rc/filetype/gluon.kak
 %%DATADIR%%/rc/filetype/go.kak
 %%DATADIR%%/rc/filetype/graphql.kak
@@ -122,6 +123,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/ocaml.kak
 %%DATADIR%%/rc/filetype/odin.kak
 %%DATADIR%%/rc/filetype/pascal.kak
+%%DATADIR%%/rc/filetype/perf.kak
 %%DATADIR%%/rc/filetype/perl.kak
 %%DATADIR%%/rc/filetype/php.kak
 %%DATADIR%%/rc/filetype/pony.kak
@@ -152,6 +154,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/troff.kak
 %%DATADIR%%/rc/filetype/tupfile.kak
 %%DATADIR%%/rc/filetype/twig.kak
+%%DATADIR%%/rc/filetype/typst.kak
 %%DATADIR%%/rc/filetype/vhdl.kak
 %%DATADIR%%/rc/filetype/void-linux.kak
 %%DATADIR%%/rc/filetype/yaml.kak
@@ -164,6 +167,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/tools/ctags.kak
 %%DATADIR%%/rc/tools/doc.asciidoc
 %%DATADIR%%/rc/tools/doc.kak
+%%DATADIR%%/rc/tools/fifo.kak
 %%DATADIR%%/rc/tools/format.kak
 %%DATADIR%%/rc/tools/git.kak
 %%DATADIR%%/rc/tools/go/gopls.kak
