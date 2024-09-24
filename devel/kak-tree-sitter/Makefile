@@ -10,7 +10,7 @@ WWW=		https://git.sr.ht/~hadronized/kak-tree-sitter
 LICENSE=	BSD3CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-RUN_DEPENDS=    ${LOCALBASE}/git:devel/git
+RUN_DEPENDS=    git:devel/git
 
 USES=		cargo
 USE_GITHUB=     yes
