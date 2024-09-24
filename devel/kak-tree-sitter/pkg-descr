@@ -1,0 +1,4 @@
+The kak-tree-sitter package integrates tree-sitter with kakoune. It implements
+a stand-alone server and provides the necessary glue for use from kakoune. The
+grammars are provided separately.
+
