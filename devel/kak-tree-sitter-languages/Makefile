@@ -10,7 +10,7 @@ COMMENT=	Language implementations for kak-tree-sitter
 WWW=		https://git.sr.ht/~hadronized/kak-tree-sitter
 
 FETCH_DEPENDS=    ktsctl:devel/kak-tree-sitter
-BUILD_DEPENDS=    ktsctl:devel/kak_tree_sitter
+BUILD_DEPENDS=    ktsctl:devel/kak-tree-sitter
 
 DISTFILES=
 
