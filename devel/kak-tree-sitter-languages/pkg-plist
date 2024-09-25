@@ -222,3 +222,4 @@ share/kak-tree-sitter/queries/zig/bc737404e8ad462b4101987730f4a76658d132ad/texto
 @dir share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586
 @dir share/kak-tree-sitter/queries/hyprlang/079f544260f4f5eaff08104bf07abd57bfb7b611
 @dir share/kak-tree-sitter/queries/unison/be307a420480178c1bc443992c8336f6471b8b7b
+@sample etc/kak-tree-sitter/config.toml.sample
