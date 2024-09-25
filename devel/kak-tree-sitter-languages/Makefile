@@ -25,7 +25,6 @@ NO_TEST=	yes
 
 do-fetch:
 	@${MKDIR} ${KTSCTL_FETCH}
-	@${CHMOD} 0700 ${KTSCTL_FETCH}
 	@XDG_CONFIG=${FILESDIR} XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all
 
 do-extract:
