@@ -38,9 +38,9 @@ post-extract:
 	@${ECHO_MSG} "hereur: post-extract"
 
 do-extract:
-	@${ECHO_MSG} "%s" "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
-	@${ECHO_MSG} "%s" "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+	@${ECHO_MSG} "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
 
 
 post-patch:
