@@ -32,6 +32,7 @@ do-fetch:
 	      git -C "$$d" rev-parse --quiet --verify "$${pin}^{commit}" >/dev/null || git -C "$$d" fetch --depth 1 origin "$${pin}"; \
 	    done
 	@${ECHO_MSG} "hereur0:\n$$(ls -lsa ${KTSCTL_FETCH})"
+	@${ECHO_MSG} "FETCH USER: $$(id)"
 
 # pre-extract:
 # 	@${ECHO_MSG} "hereur: pre-extract"
@@ -40,10 +41,12 @@ do-fetch:
 # 	@${ECHO_MSG} "hereur: post-extract"
 
 do-extract:
+	@${ECHO_MSG} "EXTRACT USER: $$(id)"
 	@${MKDIR} ${KTSCTL_COMPILE}
-	@${ECHO_MSG} "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+	@${ECHO_MSG} "DST USER: $$(id)"
 
 post-patch:
 	@${MKDIR} ${KTSCTL_CONFIG}/kak-tree-sitter
