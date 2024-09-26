@@ -29,11 +29,11 @@ do-fetch:
 	@${ECHO_MSG} "hereur0:\n$$(ls -lsa ${KTSCTL_FETCH})"
 	@awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
 	  | while read url pin dir; do \
+	      ${ECHO_MSG} "hereur1: fetching to ${KTSCTL_FETCH}/sources/$${dir}"
 	      d="${KTSCTL_FETCH}/sources/$${dir}" && test -d "$$d" || git clone "$${url}" --depth 1 "$$d" || exit 1; \
 	      git -C "$$d" rev-parse --quiet --verify "$${pin}^{commit}" >/dev/null || git -C "$$d" fetch --depth 1 origin "$${pin}"; \
 	    done
-	@${ECHO_MSG} "hereur0:\n$$(ls -lsa ${KTSCTL_FETCH})"
-	@${ECHO_MSG} "FETCH USER: $$(id)"
+	@${ECHO_MSG} "hereur2: fetch complete"
 
 # pre-extract:
 # 	@${ECHO_MSG} "hereur: pre-extract"
