@@ -23,18 +23,21 @@ KTSCTL_ETC=${STAGEDIR}${PREFIX}/etc
 NO_BUILD=	yes
 NO_TEST=	yes
 
-GIT_CMD=    GIT_SAVE_DIRECTORIES='*' git
+GIT_CMD=    git
+
+# Test UID to avoid git stupidity when running as an extract dependency
 do-fetch:
 	@${ECHO_MSG} "do-fetch: $$(id)"
-	@${MKDIR} ${KTSCTL_FETCH}
-	@${ECHO_MSG} "hereur0:\n$$(ls -lsa ${KTSCTL_FETCH})"
-	@awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
-	  | while read url pin dir; do \
-	      ${ECHO_MSG} "hereur1: fetching to ${KTSCTL_FETCH}/sources/$${dir}"; \
-	      d="${KTSCTL_FETCH}/sources/$${dir}" && test -d "$$d" || ${GIT_CMD} clone "$${url}" --depth 1 "$$d" || exit 1; \
-	      ${GIT_CMD} -C "$$d" rev-parse --quiet --verify "$${pin}^{commit}" >/dev/null || ${GIT_CMD} -C "$$d" fetch --depth 1 origin "$${pin}"; \
-	    done
-	@${ECHO_MSG} "hereur2: fetch complete"
+	@if [ ${UID} = 0 ]; then \
+  	  @${MKDIR} ${KTSCTL_FETCH}
+  	  @awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
+  	    | while read url pin dir; do \
+  	        ${ECHO_MSG} "hereur1: fetching to ${KTSCTL_FETCH}/sources/$${dir}"; \
+  	        d="${KTSCTL_FETCH}/sources/$${dir}" && test -d "$$d" || ${GIT_CMD} clone "$${url}" --depth 1 "$$d" || exit 1; \
+  	        ${GIT_CMD} -C "$$d" rev-parse --quiet --verify "$${pin}^{commit}" >/dev/null || ${GIT_CMD} -C "$$d" fetch --depth 1 origin "$${pin}"; \
+  	      done; \
+  	fi
+  	@${ECHO_MSG} "hereur2: fetch complete"
 
 # pre-extract:
 # 	@${ECHO_MSG} "hereur: pre-extract"
@@ -42,21 +45,12 @@ do-fetch:
 # post-extract:
 # 	@${ECHO_MSG} "hereur: post-extract"
 
-# do-extract:
-# 	@${ECHO_MSG} "EXTRACT USER: $$(id)"
-# 	@${MKDIR} ${KTSCTL_COMPILE}
-# 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-# 	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-# 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
-# 	@${ECHO_MSG} "DST USER: $$(id)"
-
-# post-extract:
-# 	@${ECHO_MSG} "EXTRACT USER: $$(id)"
-# 	@${MKDIR} ${KTSCTL_COMPILE}
-# 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-# 	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-# 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
-# 	@${ECHO_MSG} "DST USER: $$(id)"
+do-extract:
+	@${ECHO_MSG} "EXTRACT USER: $$(id)"
+	@${MKDIR} ${KTSCTL_COMPILE}
+	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+	@${ECHO_MSG} "DST USER: $$(id)"
 
 post-patch:
 	@${ECHO_MSG} "post-patch: $$(id)"
@@ -65,9 +59,6 @@ post-patch:
 
 do-install:
 	@${ECHO_MSG} "do-install: $$(id)"
-	@${MKDIR} ${KTSCTL_COMPILE}
-	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 	@${MKDIR} ${KTSCTL_INSTALL} ${KTSCTL_ETC}/kak-tree-sitter
 	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} ktsctl compile --all
 	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
