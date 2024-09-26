@@ -28,8 +28,8 @@ GIT_CMD=    git
 # Test UID to avoid git stupidity when running as an extract dependency
 do-fetch:
 	@${ECHO_MSG} "do-fetch: $$(id)"
+  	@${MKDIR} ${KTSCTL_FETCH}
 	@if [ ${UID} = 0 ]; then \
-  	  @${MKDIR} ${KTSCTL_FETCH}
   	  @awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
   	    | while read url pin dir; do \
   	        ${ECHO_MSG} "hereur1: fetching to ${KTSCTL_FETCH}/sources/$${dir}"; \
