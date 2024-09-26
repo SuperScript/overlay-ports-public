@@ -39,7 +39,7 @@ post-extract:
 
 do-extract:
 	@${ECHO_MSG} "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
-	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+	@${CP} -r -p ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
 
 
