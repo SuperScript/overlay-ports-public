@@ -32,14 +32,14 @@ do-fetch:
 	    done
 
 pre-extract:
-	@printf "hereur: pre-extract"
+	@${ECHO_MSG} "hereur: pre-extract"
 
 post-extract:
-	@printf "hereur: post-extract"
+	@${ECHO_MSG} "hereur: post-extract"
 
 do-extract:
-	@printf "%s" "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
-	@printf "%s" "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+	@${ECHO_MSG} "%s" "SRC: ${KTSCTL_FETCH}:$$(ls -lsa ${KTSCTL_FETCH})"
+	@${ECHO_MSG} "%s" "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 
 
