@@ -24,6 +24,7 @@ NO_BUILD=	yes
 NO_TEST=	yes
 
 do-fetch:
+	@${ECHO_MSG} "do-fetch: $$(id)"
 	@${MKDIR} ${KTSCTL_FETCH}
 	@${ECHO_MSG} "hereur0:\n$$(ls -lsa ${KTSCTL_FETCH})"
 	@awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
@@ -57,10 +58,12 @@ do-fetch:
 # 	@${ECHO_MSG} "DST USER: $$(id)"
 
 post-patch:
+	@${ECHO_MSG} "post-patch: $$(id)"
 	@${MKDIR} ${KTSCTL_CONFIG}/kak-tree-sitter
 	@${CP} ${FILESDIR}/kak-tree-sitter/config.toml ${KTSCTL_CONFIG}/kak-tree-sitter/
 
 do-install:
+	@${ECHO_MSG} "do-install: $$(id)"
 	@${MKDIR} ${KTSCTL_COMPILE}
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
