@@ -40,19 +40,30 @@ do-fetch:
 # post-extract:
 # 	@${ECHO_MSG} "hereur: post-extract"
 
-do-extract:
-	@${ECHO_MSG} "EXTRACT USER: $$(id)"
-	@${MKDIR} ${KTSCTL_COMPILE}
-	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
-	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
-	@${ECHO_MSG} "DST USER: $$(id)"
+# do-extract:
+# 	@${ECHO_MSG} "EXTRACT USER: $$(id)"
+# 	@${MKDIR} ${KTSCTL_COMPILE}
+# 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+# 	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+# 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+# 	@${ECHO_MSG} "DST USER: $$(id)"
+
+# post-extract:
+# 	@${ECHO_MSG} "EXTRACT USER: $$(id)"
+# 	@${MKDIR} ${KTSCTL_COMPILE}
+# 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+# 	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+# 	@${ECHO_MSG} "DST: ${KTSCTL_COMPILE}:$$(ls -lsa ${KTSCTL_COMPILE})"
+# 	@${ECHO_MSG} "DST USER: $$(id)"
 
 post-patch:
 	@${MKDIR} ${KTSCTL_CONFIG}/kak-tree-sitter
 	@${CP} ${FILESDIR}/kak-tree-sitter/config.toml ${KTSCTL_CONFIG}/kak-tree-sitter/
 
 do-install:
+	@${MKDIR} ${KTSCTL_COMPILE}
+	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
+	@${CHMOD} -R  ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 	@${MKDIR} ${KTSCTL_INSTALL} ${KTSCTL_ETC}/kak-tree-sitter
 	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} ktsctl compile --all
 	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
