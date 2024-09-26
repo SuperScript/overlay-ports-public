@@ -14,7 +14,7 @@ BUILD_DEPENDS=    ktsctl:devel/kak-tree-sitter
 
 DISTFILES=
 
-KTSCTL_FETCH=/tmp/${PORTNAME}
+KTSCTL_FETCH=${DISTDIR}/${DISTNAME}/ktsctl
 KTSCTL_CONFIG=${WRKSRC}
 KTSCTL_COMPILE=${WRKSRC}
 KTSCTL_INSTALL=${STAGEDIR}${PREFIX}/share
@@ -25,8 +25,11 @@ NO_TEST=	yes
 
 do-fetch:
 	@${MKDIR} ${KTSCTL_FETCH}
-	@${CHMOD} 0700 ${KTSCTL_FETCH}
-	@XDG_CONFIG=${FILESDIR} XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all
+	@awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
+	  | while read url pin dir; do \
+	      d="${KTSCTL_FETCH}/sources/$${dir}" && test -d "$$d" || git clone "$${url}" --depth 1 "$$d" || exit 1; \
+	      git -C "$$d" rev-parse --quiet --verify "$${pin}^{commit}" >/dev/null || git -C "$$d" fetch --depth 1 origin "$${pin}"; \
+	    done
 
 do-extract:
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
