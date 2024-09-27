@@ -29,9 +29,13 @@ GIT_CMD=    git
 # Test UID to avoid git stupidity when running as an extract dependency
 do-fetch:
 	@${MKDIR} ${KTSCTL_FETCH}
-	@for lang in $$(awk -F'[.]' '$$1=="[language" && $$3 == "grammar]"{print $$2};{next}' < files/kak-tree-sitter/config.toml); do \
-	  XDG_CONFIG_HOME=${KTSCTL_FETCH_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch "$$lang"; \
-	done
+	@if [ $$(${ID} -un)" != "nobody" ]; then \
+	  XDG_CONFIG_HOME=${KTSCTL_FETCH_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all; \
+	fi
+
+	#   for lang in $$(awk -F'[.]' '$$1=="[language" && $$3 == "grammar]"{print $$2};{next}' < files/kak-tree-sitter/config.toml); do \
+	#   XDG_CONFIG_HOME=${KTSCTL_FETCH_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch "$$lang"; \
+	# done
 
 	# @if [ ${UID} = 0 ]; then \
 	#   @awk -F '[" ]+' '$$1=="url"{url=$$3;next};$$1=="pin"{dir=url;pin=$$3;sub("^[^:/]+://","",dir);printf("%s %s %s\n",url,pin,dir)}' < ${FILESDIR}/kak-tree-sitter/config.toml \
