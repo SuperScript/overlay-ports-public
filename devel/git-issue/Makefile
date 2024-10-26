@@ -2,7 +2,7 @@
 
 PORTNAME=	git-issue
 DISTVERSIONPREFIX=	v
-DISTVERSION=    0.1.0_0
+DISTVERSION=    0.1.0_1
 CATEGORIES=	devel
 
 MAINTAINER=	ports@FreeBSD.org
@@ -12,7 +12,7 @@ WWW=		https://github.com/dspinellis/git-issue
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-RUN_DEPENDS=	git:devel/git jq:textproc/jq curl:ftp/curl
+RUN_DEPENDS=	git:devel/git jq:textproc/jq curl:ftp/curl gdate:sysutils/coreutils
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	dspinellis
