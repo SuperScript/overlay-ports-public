@@ -12,7 +12,7 @@ WWW=		https://github.com/dspinellis/git-issue
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-RUN_DEPENDS=	git:devel/git
+RUN_DEPENDS=	git:devel/git jq:textproc/jq curl:ftp/curl
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	dspinellis
