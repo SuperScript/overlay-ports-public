@@ -5,7 +5,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=    0.1.0_1
 CATEGORIES=	devel
 
-MAINTAINER=	ports@FreeBSD.org
+MAINTAINER=	freebsd@superscript.com
 COMMENT=	Git-based decentralized issue management system
 WWW=		https://github.com/dspinellis/git-issue
 
