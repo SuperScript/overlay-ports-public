@@ -1,0 +1,4 @@
+The git-issue program is a minimalist decentralized issue management system
+based on Git, offering (optional) biderectional integration with GitHub and
+GitLab issue management.
+

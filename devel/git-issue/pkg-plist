@@ -1,0 +1,4 @@
+bin/git-issue
+etc/bash_completion.d/git-issue
+lib/git-issue/import-export.sh
+share/man/man1/git-issue.1.gz
