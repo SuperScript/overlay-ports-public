@@ -1,0 +1,4 @@
+PostgreSQL extension that provides graph database functionality. The goal of
+Apache AGE is to enable Postgres users to gain access to graph query modeling
+in Postgres’ existing relational model.
+
