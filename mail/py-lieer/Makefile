@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 RUN_DEPENDS=	${PYTHON_PKGNAMEPREFIX}google-auth-oauthlib>=0:security/py-google-auth-oauthlib@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}google-api-python-client>=0:www/py-google-api-python-client@${PY_FLAVOR} \
 		${PYTHON_PKGNAMEPREFIX}tqdm>=0:misc/py-tqdm@${PY_FLAVOR} \
-		${PYTHON_PKGNAMEPREFIX}notmuch2>=0:mail/py-notmuch2@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}notmuch0>=0:mail/py-notmuch2@${PY_FLAVOR} \
 		notmuch:mail/notmuch
 
 USES=		python
