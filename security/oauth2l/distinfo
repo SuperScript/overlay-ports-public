@@ -1,5 +1,5 @@
-TIMESTAMP = 1746406189
-SHA256 (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.mod) = 8394a94dbd00f77e9d53a6e3353c9d149fb9c5c9d739b16c83856a4cadbab0ae
-SIZE (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.mod) = 327
+TIMESTAMP = 1746413436
+SHA256 (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.mod) = 2dce4e9d7b8df708f12eacbaa70884e95ce7c7a9c346ffec874812ffa9bc57dd
+SIZE (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.mod) = 325
 SHA256 (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.zip) = c702b25ce17b097a554b37d79ec56a6c66ef94c310db3788fd3e5a0692396691
 SIZE (go/security_oauth2l/oauth2l-v1.3.3/v1.3.3.zip) = 83667
