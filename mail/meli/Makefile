@@ -16,7 +16,7 @@ LIB_DEPENDS=	libcurl.so:ftp/curl \
 		libgpgme.so:security/gpgme \
 		libdbus-1.so:devel/dbus
 
-USES=		cargo pkgconfig
+USES=		cargo pkgconfig perl5
 USE_GITHUB=	yes
 GH_ACCOUNT=	meli
 
