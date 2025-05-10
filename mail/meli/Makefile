@@ -1,5 +1,6 @@
 PORTNAME=	meli
 PORTVERSION=	0.8.11
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 CATEGORIES=	mail
 MASTER_SITES=	https://git.meli-email.org/meli/meli/archive/
