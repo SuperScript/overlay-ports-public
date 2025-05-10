@@ -21,23 +21,9 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	meli
 
 CARGO_FEATURES=	sqlite3 notmuch smtp dbus-notifications gpgme cli-docs jmap
-CARGO_INSTALL_PATH= meli melib
-
-OPTIONS_DEFINE=	DOCS EXAMPLES
-
-# These are the default features from the meli project
-# future: add options to enable/disable features as needed
+CARGO_INSTALL_PATH= meli
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/meli
-
-post-install-DOCS-on:
-	@${MKDIR} ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKSRC}/README.md ${STAGEDIR}${DOCSDIR}
-	${INSTALL_DATA} ${WRKSRC}/CHANGELOG.md ${STAGEDIR}${DOCSDIR}
-
-post-install-EXAMPLES-on:
-	@${MKDIR} ${STAGEDIR}${EXAMPLESDIR}
-	${CP} -R ${WRKSRC}/docs/samples/* ${STAGEDIR}${EXAMPLESDIR}
 
 .include <bsd.port.mk>
