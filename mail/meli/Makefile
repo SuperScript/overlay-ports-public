@@ -21,6 +21,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	meli
 
 CARGO_FEATURES=	sqlite3 notmuch smtp dbus-notifications gpgme cli-docs jmap
+CARGO_INSTALL_PATH= meli melib
 
 OPTIONS_DEFINE=	DOCS EXAMPLES
 
