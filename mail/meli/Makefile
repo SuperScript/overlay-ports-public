@@ -23,7 +23,6 @@ GH_ACCOUNT=	meli
 CARGO_FEATURES=	sqlite3 notmuch smtp dbus-notifications gpgme cli-docs jmap
 CARGO_INSTALL_PATH= meli
 
-post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/meli
+PLIST_FILES=    bin/meli
 
 .include <bsd.port.mk>
