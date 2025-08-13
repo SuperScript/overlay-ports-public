@@ -41,6 +41,7 @@ libexec/kak/kak
 %%DATADIR%%/doc/regex.asciidoc
 %%DATADIR%%/doc/registers.asciidoc
 %%DATADIR%%/doc/scopes.asciidoc
+%%DATADIR%%/gdb/kakoune.py
 %%DATADIR%%/kakrc
 %%DATADIR%%/rc/detection/editorconfig.kak
 %%DATADIR%%/rc/detection/file.kak
@@ -76,12 +77,14 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/fennel.kak
 %%DATADIR%%/rc/filetype/fidl.kak
 %%DATADIR%%/rc/filetype/fish.kak
+%%DATADIR%%/rc/filetype/forth.kak
 %%DATADIR%%/rc/filetype/fsharp.kak
 %%DATADIR%%/rc/filetype/gas.kak
 %%DATADIR%%/rc/filetype/gdscript.kak
 %%DATADIR%%/rc/filetype/gentoo-linux.kak
 %%DATADIR%%/rc/filetype/git.kak
 %%DATADIR%%/rc/filetype/github.kak
+%%DATADIR%%/rc/filetype/gjs.kak
 %%DATADIR%%/rc/filetype/gleam.kak
 %%DATADIR%%/rc/filetype/gluon.kak
 %%DATADIR%%/rc/filetype/go.kak
@@ -129,6 +132,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/pony.kak
 %%DATADIR%%/rc/filetype/prolog.kak
 %%DATADIR%%/rc/filetype/protobuf.kak
+%%DATADIR%%/rc/filetype/prql.kak
 %%DATADIR%%/rc/filetype/pug.kak
 %%DATADIR%%/rc/filetype/purescript.kak
 %%DATADIR%%/rc/filetype/python.kak
@@ -152,11 +156,13 @@ libexec/kak/kak
 %%DATADIR%%/rc/filetype/terraform.kak
 %%DATADIR%%/rc/filetype/toml.kak
 %%DATADIR%%/rc/filetype/troff.kak
+%%DATADIR%%/rc/filetype/ttl.kak
 %%DATADIR%%/rc/filetype/tupfile.kak
 %%DATADIR%%/rc/filetype/twig.kak
 %%DATADIR%%/rc/filetype/typst.kak
 %%DATADIR%%/rc/filetype/vhdl.kak
 %%DATADIR%%/rc/filetype/void-linux.kak
+%%DATADIR%%/rc/filetype/wren.kak
 %%DATADIR%%/rc/filetype/yaml.kak
 %%DATADIR%%/rc/filetype/zig.kak
 %%DATADIR%%/rc/tools/autorestore.asciidoc
@@ -185,6 +191,7 @@ libexec/kak/kak
 %%DATADIR%%/rc/tools/spell.kak
 %%DATADIR%%/rc/windowing/appleterminal.kak
 %%DATADIR%%/rc/windowing/detection.kak
+%%DATADIR%%/rc/windowing/hyprland.kak
 %%DATADIR%%/rc/windowing/iterm.kak
 %%DATADIR%%/rc/windowing/kitty.kak
 %%DATADIR%%/rc/windowing/new-client.kak
