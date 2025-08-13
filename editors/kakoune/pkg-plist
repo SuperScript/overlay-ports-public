@@ -41,7 +41,6 @@ libexec/kak/kak
 %%DATADIR%%/doc/regex.asciidoc
 %%DATADIR%%/doc/registers.asciidoc
 %%DATADIR%%/doc/scopes.asciidoc
-%%DATADIR%%/gdb/kakoune.py
 %%DATADIR%%/kakrc
 %%DATADIR%%/rc/detection/editorconfig.kak
 %%DATADIR%%/rc/detection/file.kak
