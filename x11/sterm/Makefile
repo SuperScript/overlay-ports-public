@@ -1,15 +1,15 @@
 PORTNAME=	sterm
-DISTVERSION=	0.9.1_3
+DISTVERSION=	0.9.3_1
 
 USE_GITHUB=	yes
 GH_ACCOUNT=     superscript
 GH_PROJECT=     st
-GH_TAGNAME=     8914df6
+GH_TAGNAME=     26a2235f
 
 CATEGORIES=	x11
 DISTNAME=	st-${PORTVERSION}
 
-MAINTAINER=	web+freebsd@superscript.com
+MAINTAINER=	freebsd@superscript.com
 COMMENT=	Simple X terminal
 WWW=		https://st.suckless.org/
 
@@ -22,12 +22,13 @@ LIB_DEPENDS=	libfontconfig.so:x11-fonts/fontconfig \
 USES=		pkgconfig xorg
 USE_XORG=	x11 xext xft
 
-PLIST_FILES=	bin/st share/man/man1/st.1.gz
 MAKE_ARGS=	PREFIX="${PREFIX}" VERSION="${PORTVERSION}" \
 		X11INC="${LOCALBASE}/include" X11LIB="${LOCALBASE}/lib"
 
 # This way we avoid running tic on st.info which does not work as expected.
 BINARY_ALIAS=	tic=true
+
+PLIST_FILES=	bin/st share/man/man1/st.1.gz
 
 PORTDATA=	config.def.h st.info
 PORTDOCS=	FAQ LEGACY README TODO
@@ -37,21 +38,11 @@ SCROLLBACK_DESC=	Scroll back through terminal output
 XRESOURCES_DESC=	Allow to handle settings from Xresources
 
 SCROLLBACK_PATCH_SITES=	https://st.suckless.org/patches/scrollback/
-SCROLLBACK_PATCHFILES=	st-scrollback-0.8.5.diff:-p1 \
-			st-scrollback-mouse-20220127-2c5edf2.diff:-p1
+SCROLLBACK_PATCHFILES=	st-scrollback-0.9.2.diff:-p1 \
+			st-scrollback-mouse-0.9.2.diff:-p1
 
 XRESOURCES_PATCH_SITES=	https://st.suckless.org/patches/xresources/
-XRESOURCES_PATCHFILES=	st-xresources-20200604-9ba7ecf.diff:-p1
-
-.if defined(PORT_OPTIONS:MSCROLLBACK)
-PATCH_SITES+= ${SCROLLBACK_PATCH_SITES}
-PATCHFILES+= ${SCROLLBACK_PATCHFILES}
-.endif
-
-.if defined(PORT_OPTIONS:MXRESOURCES)
-PATCH_SITES+= ${XRESOURCES_PATCH_SITES}
-PATCHFILES+= ${XRESOURCES_PATCHFILES}
-.endif
+XRESOURCES_PATCHFILES=	st-xresources-20230320-45a15676.diff:-p1
 
 pre-everything::
 	@${ECHO_MSG} "You can build st with your own config.h using the ST_CONF knob:"
