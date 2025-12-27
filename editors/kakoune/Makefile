@@ -1,12 +1,11 @@
 PORTNAME=	kakoune
-DISTVERSION=	2025.06.03
-PORTREVISION=   1
+DISTVERSION=	2025.12.27
 CATEGORIES=	editors
 
 USE_GITHUB=     yes
 GH_ACCOUNT=     mawww
 GH_PROJECT=     kakoune
-GH_TAGNAME=     7b2fcd6e
+GH_TAGNAME=     54f2fc0
 
 MAINTAINER=	freebsd@superscript.com
 COMMENT=	Modal code editor with a focus on interactivity
