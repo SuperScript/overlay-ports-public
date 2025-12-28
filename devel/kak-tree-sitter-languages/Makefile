@@ -26,9 +26,7 @@ GIT_CMD=    git
 # Test UID to avoid git stupidity when running as an extract dependency
 do-fetch:
 	@${MKDIR} ${KTSCTL_FETCH}
-	@if [ "$$(${ID} -un)" != "nobody" ]; then \
-	  XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all; \
-	fi
+	XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all;
 
 do-extract:
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
