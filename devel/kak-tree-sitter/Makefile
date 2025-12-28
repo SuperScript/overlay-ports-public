@@ -17,11 +17,16 @@ RUN_DEPENDS=    git:devel/git
 
 USES=		cargo
 WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTNAME}
+EXTRACT_ONLY=   ${DISTNAME}${EXTRACT_SUFX}
 
+CARGO_CARGOTOML=        ${WRKSRC}/Cargo.toml
 CARGO_INSTALL_PATH= kak-tree-sitter ktsctl
 
 PLIST_FILES=    bin/kak-tree-sitter \
                 bin/ktsctl
+
+post-extract:
+	:
 
 .include <bsd.port.mk>
 
