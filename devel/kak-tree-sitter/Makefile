@@ -1,7 +1,10 @@
 PORTNAME=	kak-tree-sitter
-DISTVERSION=	1.1.1
+DISTVERSION=	3.1.1
 PORTREVISION=	1
 CATEGORIES=	devel
+
+MASTER_SITES=	https://git.sr.ht/~hadronized/${PORTNAME}/archive/
+DISTNAME=	${PORTNAME}-v${DISTVERSION}
 
 MAINTAINER=	freebsd@superscript.com
 COMMENT=	Integration of tree-sitter with kakoune
@@ -13,9 +16,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 RUN_DEPENDS=    git:devel/git
 
 USES=		cargo
-USE_GITHUB=     yes
-GH_ACCOUNT=     superscript
-GH_TAGNAME=     4a71775
+WRKSRC=		${WRKDIR}/${PORTNAME}-${DISTNAME}
 
 CARGO_INSTALL_PATH= kak-tree-sitter ktsctl
 
