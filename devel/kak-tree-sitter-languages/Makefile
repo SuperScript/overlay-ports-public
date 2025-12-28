@@ -14,7 +14,7 @@ BUILD_DEPENDS=    ktsctl:devel/kak-tree-sitter
 
 DISTFILES=
 
-KTSCTL_FETCH=${DISTDIR}/${DISTNAME}/ktsctl
+KTSCTL_FETCH=${DISTDIR}/${PORTNAME}-${DISTVERSION}/ktsctl
 KTSCTL_COMPILE=${WRKSRC}
 KTSCTL_INSTALL=${STAGEDIR}${PREFIX}/share
 KTSCTL_ETC=${STAGEDIR}${PREFIX}/etc
@@ -23,7 +23,6 @@ NO_TEST=	yes
 
 GIT_CMD=    git
 
-# Test UID to avoid git stupidity when running as an extract dependency
 do-fetch:
 	@${MKDIR} ${KTSCTL_FETCH}
 	XDG_RUNTIME_DIR=${KTSCTL_FETCH} ktsctl fetch --all;
