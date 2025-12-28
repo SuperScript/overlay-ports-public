@@ -1,5 +1,5 @@
 PORTNAME=	kak-tree-sitter-languages
-DISTVERSION=	1.1.1
+DISTVERSION=	3.1.1
 PORTREVISION=	1
 CATEGORIES=	devel
 
