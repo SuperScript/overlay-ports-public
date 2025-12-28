@@ -19,7 +19,6 @@ KTSCTL_COMPILE=${WRKSRC}
 KTSCTL_INSTALL=${STAGEDIR}${PREFIX}/share
 KTSCTL_ETC=${STAGEDIR}${PREFIX}/etc
 
-# NO_BUILD=	yes
 NO_TEST=	yes
 
 GIT_CMD=    git
@@ -35,15 +34,12 @@ do-extract:
 	@${CP} -r ${KTSCTL_FETCH} ${KTSCTL_COMPILE}
 
 do-build:
-	@${MKDIR} ${KTSCTL_INSTALL}
 	@XDG_RUNTIME_DIR=${KTSCTL_COMPILE} ktsctl compile --all
 
 do-install:
+	@${MKDIR} ${KTSCTL_INSTALL}
 	@${MKDIR} ${KTSCTL_ETC}/kak-tree-sitter
-	@XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
-
-# stage:
-# 	@${TOUCH} ${TOUCH_FLAGS} ${STAGE_COOKIE}
+	@XDG_RUNTIME_DIR=${KTSCTL_COMPILE} XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
 
 .include <bsd.port.mk>
 
