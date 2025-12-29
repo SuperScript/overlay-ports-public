@@ -9,9 +9,7 @@ MAINTAINER=	freebsd@superscript.com
 COMMENT=	Language implementations for kak-tree-sitter
 WWW=		https://git.sr.ht/~hadronized/kak-tree-sitter
 
-# FETCH_DEPENDS=    ktsctl:devel/kak-tree-sitter
-# BUILD_DEPENDS=    ktsctl:devel/kak-tree-sitter
-
+BUILD_DEPENDS=  ktsctl:devel/kak-tree-sitter
 
 # KTSCTL_FETCH=${DISTDIR}/${PORTNAME}-${DISTVERSION}
 KTSCTL_CONFIG=$(CWD)
