@@ -22,6 +22,7 @@ share/kak-tree-sitter/grammars/javascript/f1e5a09b8d02f8209a68249c93f0ad647b228e
 share/kak-tree-sitter/grammars/json/73076754005a460947cafe8e03a8cf5fa4fa2938.so
 share/kak-tree-sitter/grammars/jsx/f1e5a09b8d02f8209a68249c93f0ad647b228e6e.so
 share/kak-tree-sitter/grammars/julia/2f885efd38a6a6abfefc81d53ecdd99812dcde69.so
+share/kak-tree-sitter/grammars/koka/96d070c3700692858035f3524cc0ad944cef2594.so
 share/kak-tree-sitter/grammars/kotlin/a4f71eb9b8c9b19ded3e0e9470be4b1b77c2b569.so
 share/kak-tree-sitter/grammars/latex/dfe891922ccd2e7cef52eccb2775e1b576727165.so
 share/kak-tree-sitter/grammars/llvm/1b96e58faf558ce057d4dc664b904528aee743cb.so
@@ -47,12 +48,17 @@ share/kak-tree-sitter/grammars/vue/91fe2754796cd8fba5f229505a23fa08f3546c06.so
 share/kak-tree-sitter/grammars/xml/48a7c2b6fb9d515577e115e6788937e837815651.so
 share/kak-tree-sitter/grammars/yaml/0e36bed171768908f331ff7dff9d956bae016efb.so
 share/kak-tree-sitter/grammars/zig/0d08703e4c3f426ec61695d7617415fff97029bd.so
+share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586/LICENSE
+share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586/README.md
+share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586/highlights.scm
+share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586/injections.scm
 share/kak-tree-sitter/queries/awk/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/awk/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/awk/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/bash/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/bash/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
 share/kak-tree-sitter/queries/bash/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
+share/kak-tree-sitter/queries/bash/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/bibtex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/bibtex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/locals.scm
 share/kak-tree-sitter/queries/bibtex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/tags.scm
@@ -75,6 +81,7 @@ share/kak-tree-sitter/queries/csharp/be307a420480178c1bc443992c8336f6471b8b7b/hi
 share/kak-tree-sitter/queries/csharp/be307a420480178c1bc443992c8336f6471b8b7b/injections.scm
 share/kak-tree-sitter/queries/csharp/be307a420480178c1bc443992c8336f6471b8b7b/textobjects.scm
 share/kak-tree-sitter/queries/css/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
+share/kak-tree-sitter/queries/css/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
 share/kak-tree-sitter/queries/css/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/diff/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/elixir/be307a420480178c1bc443992c8336f6471b8b7b/highlights.scm
@@ -100,8 +107,12 @@ share/kak-tree-sitter/queries/haskell/dbd248fdfa680373d94fbc10094a160aafa0f7a7/l
 share/kak-tree-sitter/queries/haskell/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/html/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/html/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
+share/kak-tree-sitter/queries/hyprlang/079f544260f4f5eaff08104bf07abd57bfb7b611/highlights.scm
+share/kak-tree-sitter/queries/hyprlang/079f544260f4f5eaff08104bf07abd57bfb7b611/indents.scm
+share/kak-tree-sitter/queries/hyprlang/079f544260f4f5eaff08104bf07abd57bfb7b611/injections.scm
 share/kak-tree-sitter/queries/ini/ed7ea8c9ba639daebdbc81630bd789aeb344e2d4/highlights.scm
 share/kak-tree-sitter/queries/java/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
+share/kak-tree-sitter/queries/java/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
 share/kak-tree-sitter/queries/java/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/java/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/javascript/834d348b85868fbe9033231e72f29be361346aeb/LICENSE
@@ -114,6 +125,7 @@ share/kak-tree-sitter/queries/javascript/834d348b85868fbe9033231e72f29be361346ae
 share/kak-tree-sitter/queries/javascript/834d348b85868fbe9033231e72f29be361346aeb/textobjects.scm
 share/kak-tree-sitter/queries/json/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/json/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
+share/kak-tree-sitter/queries/json/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/jsx/834d348b85868fbe9033231e72f29be361346aeb/LICENSE
 share/kak-tree-sitter/queries/jsx/834d348b85868fbe9033231e72f29be361346aeb/README.md
 share/kak-tree-sitter/queries/jsx/834d348b85868fbe9033231e72f29be361346aeb/highlights.scm
@@ -128,9 +140,14 @@ share/kak-tree-sitter/queries/julia/dbd248fdfa680373d94fbc10094a160aafa0f7a7/ind
 share/kak-tree-sitter/queries/julia/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/julia/dbd248fdfa680373d94fbc10094a160aafa0f7a7/locals.scm
 share/kak-tree-sitter/queries/julia/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
+share/kak-tree-sitter/queries/koka/96d070c3700692858035f3524cc0ad944cef2594/highlights.scm
+share/kak-tree-sitter/queries/koka/96d070c3700692858035f3524cc0ad944cef2594/indents.scm
+share/kak-tree-sitter/queries/koka/96d070c3700692858035f3524cc0ad944cef2594/injections.scm
+share/kak-tree-sitter/queries/koka/96d070c3700692858035f3524cc0ad944cef2594/locals.scm
 share/kak-tree-sitter/queries/kotlin/f73e9a8d15fd5a87d472a49808baf42ba403f9bf/folds.scm
 share/kak-tree-sitter/queries/kotlin/f73e9a8d15fd5a87d472a49808baf42ba403f9bf/highlights.scm
 share/kak-tree-sitter/queries/kotlin/f73e9a8d15fd5a87d472a49808baf42ba403f9bf/injections.scm
+share/kak-tree-sitter/queries/kotlin/f73e9a8d15fd5a87d472a49808baf42ba403f9bf/locals.scm
 share/kak-tree-sitter/queries/latex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/folds.scm
 share/kak-tree-sitter/queries/latex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/latex/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
@@ -141,22 +158,18 @@ share/kak-tree-sitter/queries/llvm/e76020ddb93eeb051de606c24f92189c3fc55547/inje
 share/kak-tree-sitter/queries/llvm/e76020ddb93eeb051de606c24f92189c3fc55547/locals.scm
 share/kak-tree-sitter/queries/llvm/e76020ddb93eeb051de606c24f92189c3fc55547/textobjects.scm
 share/kak-tree-sitter/queries/make/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
+share/kak-tree-sitter/queries/make/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
 share/kak-tree-sitter/queries/make/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/markdown.inline/56ccaedffbb8011e36012278e2a4861a8d435a60/highlights.scm
 share/kak-tree-sitter/queries/markdown.inline/56ccaedffbb8011e36012278e2a4861a8d435a60/injections.scm
-share/kak-tree-sitter/queries/markdown/d2d9761f309d6204a8f4480dc23f10558a165e29/LICENSE
-share/kak-tree-sitter/queries/markdown/d2d9761f309d6204a8f4480dc23f10558a165e29/README.md
-share/kak-tree-sitter/queries/markdown/d2d9761f309d6204a8f4480dc23f10558a165e29/highlights.scm
-share/kak-tree-sitter/queries/markdown/d2d9761f309d6204a8f4480dc23f10558a165e29/injections.scm
 share/kak-tree-sitter/queries/nim/50c90cb47c9cdbb044d1a2de034285e0d198f43e/highlights.scm
 share/kak-tree-sitter/queries/nim/50c90cb47c9cdbb044d1a2de034285e0d198f43e/indents.scm
 share/kak-tree-sitter/queries/nim/50c90cb47c9cdbb044d1a2de034285e0d198f43e/textobjects.scm
 share/kak-tree-sitter/queries/nix/be307a420480178c1bc443992c8336f6471b8b7b/highlights.scm
 share/kak-tree-sitter/queries/nix/be307a420480178c1bc443992c8336f6471b8b7b/injections.scm
-share/kak-tree-sitter/queries/nu/107763083405868f3679d8e12476ed0688896f87/folds.scm
+share/kak-tree-sitter/queries/nix/be307a420480178c1bc443992c8336f6471b8b7b/textobjects.scm
 share/kak-tree-sitter/queries/nu/107763083405868f3679d8e12476ed0688896f87/highlights.scm
 share/kak-tree-sitter/queries/nu/107763083405868f3679d8e12476ed0688896f87/injections.scm
-share/kak-tree-sitter/queries/nu/107763083405868f3679d8e12476ed0688896f87/locals.scm
 share/kak-tree-sitter/queries/purescript/1615ac3b9c3b572259bce7a30c14cb06d6c2f2ff/highlights.scm
 share/kak-tree-sitter/queries/purescript/1615ac3b9c3b572259bce7a30c14cb06d6c2f2ff/injections.scm
 share/kak-tree-sitter/queries/purescript/1615ac3b9c3b572259bce7a30c14cb06d6c2f2ff/locals.scm
@@ -179,6 +192,7 @@ share/kak-tree-sitter/queries/rust/3e963b3c1b5eb4b5cd7f33b8ef6d6642de210a9b/inje
 share/kak-tree-sitter/queries/rust/3e963b3c1b5eb4b5cd7f33b8ef6d6642de210a9b/locals.scm
 share/kak-tree-sitter/queries/rust/3e963b3c1b5eb4b5cd7f33b8ef6d6642de210a9b/textobjects.scm
 share/kak-tree-sitter/queries/scheme/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
+share/kak-tree-sitter/queries/scheme/dbd248fdfa680373d94fbc10094a160aafa0f7a7/indents.scm
 share/kak-tree-sitter/queries/scheme/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
 share/kak-tree-sitter/queries/scss/be307a420480178c1bc443992c8336f6471b8b7b/highlights.scm
 share/kak-tree-sitter/queries/scss/be307a420480178c1bc443992c8336f6471b8b7b/injections.scm
@@ -186,6 +200,7 @@ share/kak-tree-sitter/queries/task/aef00a3ab640417f06dc9f59938283ffde5c451e/high
 share/kak-tree-sitter/queries/task/aef00a3ab640417f06dc9f59938283ffde5c451e/injections.scm
 share/kak-tree-sitter/queries/toml/dbd248fdfa680373d94fbc10094a160aafa0f7a7/highlights.scm
 share/kak-tree-sitter/queries/toml/dbd248fdfa680373d94fbc10094a160aafa0f7a7/injections.scm
+share/kak-tree-sitter/queries/toml/dbd248fdfa680373d94fbc10094a160aafa0f7a7/textobjects.scm
 share/kak-tree-sitter/queries/tsx/b0ecb0d376c94d2fa4814816b41986bf5d735384/LICENSE
 share/kak-tree-sitter/queries/tsx/b0ecb0d376c94d2fa4814816b41986bf5d735384/README.md
 share/kak-tree-sitter/queries/tsx/b0ecb0d376c94d2fa4814816b41986bf5d735384/highlights.scm
@@ -202,6 +217,9 @@ share/kak-tree-sitter/queries/typescript/b0ecb0d376c94d2fa4814816b41986bf5d73538
 share/kak-tree-sitter/queries/typescript/b0ecb0d376c94d2fa4814816b41986bf5d735384/locals.scm
 share/kak-tree-sitter/queries/typescript/b0ecb0d376c94d2fa4814816b41986bf5d735384/tags.scm
 share/kak-tree-sitter/queries/typescript/b0ecb0d376c94d2fa4814816b41986bf5d735384/textobjects.scm
+share/kak-tree-sitter/queries/unison/be307a420480178c1bc443992c8336f6471b8b7b/highlights.scm
+share/kak-tree-sitter/queries/unison/be307a420480178c1bc443992c8336f6471b8b7b/indents.scm
+share/kak-tree-sitter/queries/unison/be307a420480178c1bc443992c8336f6471b8b7b/injections.scm
 share/kak-tree-sitter/queries/verilog/cb286b7a5df247057602f3bba3254b4c58093375/highlights.scm
 share/kak-tree-sitter/queries/verilog/cb286b7a5df247057602f3bba3254b4c58093375/injections.scm
 share/kak-tree-sitter/queries/verilog/cb286b7a5df247057602f3bba3254b4c58093375/locals.scm
@@ -218,8 +236,3 @@ share/kak-tree-sitter/queries/zig/bc737404e8ad462b4101987730f4a76658d132ad/highl
 share/kak-tree-sitter/queries/zig/bc737404e8ad462b4101987730f4a76658d132ad/indents.scm
 share/kak-tree-sitter/queries/zig/bc737404e8ad462b4101987730f4a76658d132ad/injections.scm
 share/kak-tree-sitter/queries/zig/bc737404e8ad462b4101987730f4a76658d132ad/textobjects.scm
-@dir share/kak-tree-sitter/grammars/koka
-@dir share/kak-tree-sitter/queries/astro/862f6cd58b38d9d1b4abfb722b4a4b25bdae2586
-@dir share/kak-tree-sitter/queries/hyprlang/079f544260f4f5eaff08104bf07abd57bfb7b611
-@dir share/kak-tree-sitter/queries/unison/be307a420480178c1bc443992c8336f6471b8b7b
-@sample etc/kak-tree-sitter/config.toml.sample
