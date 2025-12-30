@@ -11,6 +11,10 @@ WWW=		https://git.sr.ht/~hadronized/kak-tree-sitter
 
 BUILD_DEPENDS=  ktsctl:devel/kak-tree-sitter
 
+# ktsctl assumes isolation of builds and also uses fixed paths, so cannot
+# parallelize if two languages use different versions of the same underlying
+MAKE_JOBS_UNSAFE=yes
+
 # KTSCTL_FETCH=${DISTDIR}/${PORTNAME}-${DISTVERSION}
 KTSCTL_CONFIG=$(CWD)
 KTSCTL_COMPILE=${WRKSRC}
@@ -39,12 +43,12 @@ post-extract:
 	@mv ${WRKDIR}/kak-tree-sitter-kak-tree-sitter-${DISTVERSION} ${WRKSRC}/ktsctl/sources/git.sr.ht/~hadronized/kak-tree-sitter
 
 do-build:
-	@XDG_CONFIG_HOME=${KTXCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} ktsctl compile --all
+	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} ktsctl compile --all
 
 do-install:
 	@${MKDIR} ${KTSCTL_INSTALL}
 	@${MKDIR} ${KTSCTL_ETC}/kak-tree-sitter
-	@XDG_CONFIG_HOME=${KTXCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
+	@XDG_CONFIG_HOME=${KTSCTL_CONFIG} XDG_RUNTIME_DIR=${KTSCTL_COMPILE} XDG_DATA_HOME=${KTSCTL_INSTALL} ktsctl install --all
 
 .include <bsd.port.mk>
 
