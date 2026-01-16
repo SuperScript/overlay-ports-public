@@ -1,8 +1,0 @@
---- src/home.build.orig	2021-05-28 19:56:33 UTC
-+++ src/home.build
-@@ -2,4 +2,4 @@
- #env - pwd
- 
- ## For package build:
--dirname "`env - pwd`"
-+echo "/usr/local/libexec/ucspi-ipc/0.70"
