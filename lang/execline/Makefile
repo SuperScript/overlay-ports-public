@@ -1,17 +1,16 @@
 PORTNAME=	execline
-DISTVERSION=	2.9.7.0
-PORTREVISION=	1
+DISTVERSION=	2.9.8.1
 CATEGORIES=	lang shells
 MASTER_SITES=	https://www.skarnet.org/software/${PORTNAME}/
 
-MAINTAINER=	freebsd@superscript.com
+MAINTAINER=	crest@rlwinm.de
 COMMENT=	Lightweight non-interactive sh(1)-like scripting language
 WWW=		https://www.skarnet.org/software/execline/
 
 LICENSE=	ISCL
 LICENSE_FILE=	${WRKSRC}/COPYING
 
-BUILD_DEPENDS=	skalibs>=2.14.4.0:devel/skalibs
+BUILD_DEPENDS=	skalibs>=2.14.5.1:devel/skalibs
 LIB_DEPENDS=	libskarnet.so:devel/skalibs
 
 USES=		gmake
@@ -29,7 +28,6 @@ OPTIONS_DEFINE=	DOCS
 DOCS=		AUTHORS README doc/*.html
 
 post-install:
-	@${MV} ${STAGEDIR}${PREFIX}/bin/wait ${STAGEDIR}${PREFIX}/bin/execline-wait
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/*
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libexecline.so.${PORTVERSION}
 
@@ -38,3 +36,4 @@ post-install-DOCS-on:
 	cd ${WRKSRC} && ${INSTALL_DATA} ${DOCS} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>
+
