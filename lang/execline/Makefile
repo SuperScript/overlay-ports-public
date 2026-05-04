@@ -1,9 +1,10 @@
 PORTNAME=	execline
 DISTVERSION=	2.9.8.1
+PORTREVISION=   1
 CATEGORIES=	lang shells
 MASTER_SITES=	https://www.skarnet.org/software/${PORTNAME}/
 
-MAINTAINER=	crest@rlwinm.de
+MAINTAINER=	freebse@superscript.com
 COMMENT=	Lightweight non-interactive sh(1)-like scripting language
 WWW=		https://www.skarnet.org/software/execline/
 
