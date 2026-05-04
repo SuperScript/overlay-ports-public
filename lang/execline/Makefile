@@ -29,6 +29,9 @@ OPTIONS_DEFINE=	DOCS
 DOCS=		AUTHORS README doc/*.html
 
 post-install:
+	${MV} ${STAGEDIR}${PREFIX}/bin/cd ${STAGEDIR}${PREFIX}/bin/execline-cd
+	${MV} ${STAGEDIR}${PREFIX}/bin/wait ${STAGEDIR}${PREFIX}/bin/execline-wait
+	${MV} ${STAGEDIR}${PREFIX}/bin/umask ${STAGEDIR}${PREFIX}/bin/execline-umask
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/bin/*
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libexecline.so.${PORTVERSION}
 
