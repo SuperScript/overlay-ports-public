@@ -1,8 +1,8 @@
-PORTNAME=	pgvector
-PORTVERSION=	1.5.0.rc0
+PORTNAME=	apache-age
+PORTVERSION=	1.7.0.rc0
 DISTVERSIONPREFIX=	v
 CATEGORIES=	databases
-PKGNAMEPREFIX=	postgresql16-
+PKGNAMEPREFIX=	postgresql18-
 
 MAINTAINER=	freebsd@superscript.com
 COMMENT=	Graph database extension for PostgreSQL
@@ -13,14 +13,14 @@ LICENSE_FILE=   ${WRKSRC}/LICENSE
 BUILD_DEPENDS=	bison:devel/bison
 NOT_FOR_ARCHS=		i386
 
-USES=		gmake perl5 pgsql:16
+USES=		gmake perl5 pgsql:18
 USE_PERL5=	build
 WANT_PGSQL=	server
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	apache
 GH_PROJECT=	age
-GH_TAGNAME=	PG16/v${PORTVERSION:S/.rc/-rc/}
+GH_TAGNAME=	PG18/v${PORTVERSION:S/.rc/-rc/}
 
 MAKE_ARGS=	OPTFLAGS="" \
                 BISON=${LOCALBASE}/bin/bison \
