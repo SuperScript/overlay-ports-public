@@ -26,7 +26,9 @@ PLIST_FILES=	bin/rg \
 PORTDOCS=	CHANGELOG.md FAQ.md GUIDE.md
 
 OPTIONS_DEFINE=		DOCS PCRE2 SIMD
-OPTIONS_DEFAULT=	PCRE2
+# Overlay: select SIMD to match the latest package fetched in place of a
+# build; poudriere deletes it as changed options otherwise.
+OPTIONS_DEFAULT=	PCRE2 SIMD
 
 OPTIONS_DEFAULT_aarch64=	SIMD
 OPTIONS_DEFAULT_amd64=	${OPTIONS_DEFAULT_i386}
