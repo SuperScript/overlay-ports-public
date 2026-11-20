@@ -1,0 +1,270 @@
+#!/bin/sh
+#_# pin-latest {list | check | pin | help} [args...]
+#_#   Pin the overlay ports in PINS to the FreeBSD ports commits that
+#_#   built their packages at a pkg repo.
+#_#
+
+#### template functions
+
+shout() { printf '%s\n' "$0: $*" >&2; }
+barf() { shout "fatal: $*"; exit 111; }
+safe() { "$@" || barf "cannot $*"; }
+catch() {
+  local catch_re="$1"
+  shift
+  { "$@" 2>&1 1>&9 | awk '
+      BEGIN { rcode = 0 }
+      !rcode && 1 == match($0,catch_re) { rcode = 111 }
+      { print $0 }
+      END { exit rcode }
+    ' catch_re="${catch_re}" >&2
+  } 9>&1
+}
+usage() { shout "usage: $*"; exit 100; }
+
+# atomic_to path prog
+#   Write output from program to path atomically
+atomic_to() {
+  local output="$1"
+  shift
+  mkdir -p "$(dirname "${output}")" || return $?
+  local temp
+  temp="$(mktemp "${output}.XXXXXX")" || return $?
+  "$@" > "${temp}" && mv "${temp}" "${output}" || {
+    local e=$?
+    rm -f "${temp}"
+    return $e
+  }
+}
+
+#_# help
+#_#   Print this helpful message
+#_#
+do_help() {
+  sed '/^#_#/!d;s/^#_#/ /;s/^ *$//' "$0"
+}
+
+#### program functions
+
+# Pin lines, in PINS, hold: origin, port commit, version, tab separated.
+# A commit of - marks an origin not yet pinned. Change lines, from list
+# and pin, hold: origin, pinned version, upstream version, upstream
+# commit, tab separated. Unmet lines, from check, hold: package name,
+# dep or shlib, the unmet name, tab separated.
+
+# _tmp
+#   Make the temporary directory tmp, removed on exit.
+_tmp() {
+  tmp="$(mktemp -d "${TMPDIR:-/tmp}/${0##*/}.XXXXXX")" \
+    || barf "cannot make temporary directory"
+  trap 'rm -rf "${tmp}"' EXIT
+  trap 'exit 1' HUP INT TERM
+}
+
+# _repo usage repo
+#   Exit through usage unless repo holds data.pkg.
+_repo() {
+  test -f "$2/data.pkg" || usage "$1: $2: no data.pkg"
+}
+
+# _get url
+#   Print the contents of url.
+_get() {
+  if command -v fetch > /dev/null 2>&1
+  then
+    fetch -q -o - "$1"
+  else
+    curl -sSfL "$1"
+  fi
+}
+
+# _pins
+#   Print the pin lines of PINS.
+_pins() {
+  test -f "${PINS}" || barf "${PINS}: no such file"
+  awk -F '\t' '
+    NF != 3 || $1 !~ /^[^\/]+\/[^\/]+$/ {
+      printf "%s: fatal: %s: line %d: malformed pin\n", prog, FILENAME, NR \
+        > "/dev/stderr"
+      exit 111
+    }
+    { print }
+  ' prog="$0" "${PINS}" || exit
+}
+
+# _setup base
+#   Write the pin lines to tmp/pins and, to tmp/upstream, the catalogue
+#   line at base of each pinned origin. Fail when an origin is missing.
+_setup() {
+  _pins > "${tmp}/pins" || exit
+  safe _get "$1/packagesite.pkg" > "${tmp}/packagesite.pkg"
+  safe tar -xOf "${tmp}/packagesite.pkg" packagesite.yaml \
+    > "${tmp}/packagesite.yaml"
+  safe jq -c --arg origins "$(cut -f 1 "${tmp}/pins")" '
+    ($origins | split("\n")) as $o
+    | select((.annotations.flavor // "") == ""
+      and (.origin as $x | any($o[]; . == $x)))
+  ' "${tmp}/packagesite.yaml" > "${tmp}/upstream"
+  safe jq -r '.origin' "${tmp}/upstream" > "${tmp}/found"
+  safe awk -F '\t' '
+    FILENAME == ARGV[1] { found[$1] = 1; next }
+    !($1 in found) { print $1 }
+  ' "${tmp}/found" "${tmp}/pins" > "${tmp}/missing"
+  test -s "${tmp}/missing" \
+    && barf "$1: no package for $(paste -s -d ' ' "${tmp}/missing")"
+  return 0
+}
+
+# _changes
+#   Print the change line of each pin in tmp/pins whose commit differs
+#   from tmp/upstream.
+_changes() {
+  safe jq -r '[.origin, .version, .annotations.port_git_hash] | @tsv' \
+    "${tmp}/upstream" \
+  | safe awk -F '\t' -v OFS='\t' '
+    FILENAME == ARGV[1] { hash[$1] = $2; version[$1] = $3; next }
+    hash[$1] != $3 { print $1, version[$1], $2, $3 }
+  ' "${tmp}/pins" - \
+  | safe sort
+}
+
+#_# list <base>
+#_#   Print a line for each pin in PINS whose commit differs from <base>.
+#_#   The format is <origin> <pinned version> <version> <commit>.
+#_#
+do_list() {
+  test $# -eq 1 || usage "$0 list <base>"
+  _tmp
+  _setup "${1%/}"
+  catch "$0: fatal:" _changes
+}
+
+# _unmet repo
+#   Print the unmet lines of tmp/upstream against repo, LIBDIRS and
+#   tmp/upstream itself.
+_unmet() {
+  { safe tar -xOf "$1/data.pkg" data \
+    | safe jq -r '.packages[] | "dep\t\(.name)",
+        (.shlibs_provided // [] | .[] | "shlib\t\(.)")'
+    safe jq -r '"dep\t\(.name)",
+        (.shlibs_provided // [] | .[] | "shlib\t\(.)")' "${tmp}/upstream"
+    printf '%s\n' "${LIBDIRS}" \
+    | tr ' ' '\n' \
+    | while read -r d
+    do
+      test -z "${d}" && continue
+      test -d "${d}" || barf "${d}: no such directory"
+      safe ls "${d}" | safe awk '/^lib.*\.so\./ { print "shlib\t" $0 }'
+    done
+  } > "${tmp}/have"
+  safe jq -r '.name as $n
+    | (.deps // {} | keys[] | "\($n)\tdep\t\(.)"),
+      (.shlibs_required // [] | .[] | "\($n)\tshlib\t\(.)")
+  ' "${tmp}/upstream" \
+  | safe awk -F '\t' '
+    FILENAME == ARGV[1] { have[$1, $2] = 1; next }
+    !(($2, $3) in have) { print }
+  ' "${tmp}/have" - \
+  | safe sort
+}
+
+# _check repo
+#   Print the unmet lines of tmp/upstream against repo, and fail when
+#   there are any.
+_check() {
+  catch "$0: fatal:" _unmet "$1" > "${tmp}/unmet" || exit
+  cat "${tmp}/unmet"
+  test -s "${tmp}/unmet" && barf "$1: unmet dependencies"
+  return 0
+}
+
+#_# check <base> <repo>
+#_#   Print a line for each dependency and shared library of the pinned
+#_#   packages at <base> that <repo> and LIBDIRS lack.
+#_#   The format is <package> {dep | shlib} <name>.
+#_#   Fail when any is lacking.
+#_#
+do_check() {
+  test $# -eq 2 || usage "$0 check <base> <repo>"
+  _repo check "${2%/}"
+  _tmp
+  _setup "${1%/}"
+  _check "${2%/}"
+}
+
+# _export origin commit
+#   Write origin at commit from PORTS_GIT to tmp/export/origin.
+_export() {
+  git -C "${PORTS_GIT}" cat-file -e "$2^{commit}" 2> /dev/null \
+    || safe git -C "${PORTS_GIT}" fetch -q origin "$2"
+  safe mkdir -p "${tmp}/export"
+  safe git -C "${PORTS_GIT}" archive "$2" "$1" \
+  | safe tar -xf - -C "${tmp}/export"
+}
+
+# _repin
+#   Print tmp/pins with each origin in tmp/changes at its new commit
+#   and version.
+_repin() {
+  awk -F '\t' -v OFS='\t' '
+    FILENAME == ARGV[1] { hash[$1] = $4; version[$1] = $3; next }
+    $1 in hash { $2 = hash[$1]; $3 = version[$1] }
+    { print }
+  ' "${tmp}/changes" "${tmp}/pins"
+}
+
+#_# pin <base> <repo>
+#_#   Replace each pinned port whose commit differs from <base> with the
+#_#   port at that commit, update PINS, and print each as list does.
+#_#   Fail, changing nothing, when check fails.
+#_#
+do_pin() {
+  test $# -eq 2 || usage "$0 pin <base> <repo>"
+  _repo pin "${2%/}"
+  _tmp
+  _setup "${1%/}"
+  _check "${2%/}"
+  catch "$0: fatal:" _changes > "${tmp}/changes" || exit
+  test -s "${tmp}/changes" || return 0
+  local origin old new commit
+  while IFS="$(printf '\t')" read -r origin old new commit
+  do
+    catch "$0: fatal:" _export "${origin}" "${commit}" || exit
+    test -f "${tmp}/export/${origin}/Makefile" \
+      || barf "${origin}: no Makefile at ${commit}"
+  done < "${tmp}/changes"
+  while IFS="$(printf '\t')" read -r origin old new commit
+  do
+    safe rm -rf "${top}/${origin}"
+    safe mkdir -p "${top}/${origin%/*}"
+    safe mv "${tmp}/export/${origin}" "${top}/${origin}"
+  done < "${tmp}/changes"
+  atomic_to "${PINS}" _repin || barf "cannot write ${PINS}"
+  cat "${tmp}/changes"
+}
+
+#### parameters
+
+top="$(cd "$(dirname "$0")/.." && pwd)" || barf "cannot find overlay top"
+
+#_# PINS=<top>/latest.pins
+#_#   Read and update pin lines in PINS.
+#_#
+: "${PINS:=${top}/latest.pins}"
+#_# PORTS_GIT=/usr/ports
+#_#   Export ports from the git clone of the FreeBSD ports tree in
+#_#   PORTS_GIT, fetching each missing commit from its origin remote.
+#_#
+: "${PORTS_GIT:=/usr/ports}"
+#_# LIBDIRS="/lib /usr/lib"
+#_#   Take the shared libraries in the space-separated LIBDIRS as base.
+#_#
+: "${LIBDIRS:=/lib /usr/lib}"
+
+#### main
+
+if test $# -lt 1
+then
+  usage "$0 {list | check | pin | help} [args...]"
+fi
+"do_$@"
