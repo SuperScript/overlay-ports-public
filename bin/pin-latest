@@ -49,8 +49,8 @@ do_help() {
 # Pin lines, in PINS, hold: origin, port commit, version, tab separated.
 # A commit of - marks an origin not yet pinned. Change lines, from list
 # and pin, hold: origin, pinned version, upstream version, upstream
-# commit, tab separated. Unmet lines, from check, hold: package name,
-# dep or shlib, the unmet name, tab separated.
+# commit, tab separated. Missing lines, from check, hold: package name,
+# missing package file name, tab separated.
 
 # _tmp
 #   Make the temporary directory tmp, removed on exit.
@@ -62,9 +62,9 @@ _tmp() {
 }
 
 # _repo usage repo
-#   Exit through usage unless repo holds data.pkg.
+#   Exit through usage unless repo holds an All directory.
 _repo() {
-  test -f "$2/data.pkg" || usage "$1: $2: no data.pkg"
+  test -d "$2/All" || usage "$1: $2: no All directory"
 }
 
 # _get url
@@ -139,57 +139,36 @@ do_list() {
   catch "$0: fatal:" _changes
 }
 
-# _unmet repo
-#   Print the unmet lines of tmp/upstream against repo, LIBDIRS and
-#   tmp/upstream itself.
-_unmet() {
-  { safe tar -xOf "$1/data.pkg" data \
-    | safe jq -r '.packages[] | "dep\t\(.name)",
-        (.shlibs_provided // [] | .[] | "shlib\t\(.)")'
-    safe jq -r '"dep\t\(.name)",
-        (.shlibs_provided // [] | .[] | "shlib\t\(.)")' "${tmp}/upstream"
-    printf '%s\n' "${LIBDIRS}" \
-    | tr ' ' '\n' \
-    | while read -r d
-    do
-      test -z "${d}" && continue
-      test -d "${d}" || barf "${d}: no such directory"
-      safe ls "${d}" | safe awk '/^lib.*\.so\./ { print "shlib\t" $0 }'
-    done
-  } > "${tmp}/have"
+# _missing repo
+#   Print the missing lines of the pinned packages in tmp/upstream and
+#   their dependencies against repo/All.
+_missing() {
   safe jq -r '.name as $n
-    | (.deps // {} | keys[] | "\($n)\tdep\t\(.)"),
-      (.shlibs_required // [] | .[] | "\($n)\tshlib\t\(.)")
+    | "\($n)\t\($n)-\(.version)",
+      (.deps // {} | to_entries[] | "\($n)\t\(.key)-\(.value.version)")
   ' "${tmp}/upstream" \
-  | safe awk -F '\t' '
-    FILENAME == ARGV[1] { have[$1, $2] = 1; next }
-    !(($2, $3) in have) { print }
-  ' "${tmp}/have" - \
+  | while IFS="$(printf '\t')" read -r name file
+  do
+    test -e "$1/All/${file}.pkg" || printf '%s\t%s\n' "${name}" "${file}"
+  done \
   | safe sort
 }
 
-# _check repo
-#   Print the unmet lines of tmp/upstream against repo, and fail when
-#   there are any.
-_check() {
-  catch "$0: fatal:" _unmet "$1" > "${tmp}/unmet" || exit
-  cat "${tmp}/unmet"
-  test -s "${tmp}/unmet" && barf "$1: unmet dependencies"
-  return 0
-}
-
 #_# check <base> <repo>
-#_#   Print a line for each dependency and shared library of the pinned
-#_#   packages at <base> that <repo> and LIBDIRS lack.
-#_#   The format is <package> {dep | shlib} <name>.
-#_#   Fail when any is lacking.
+#_#   Print a line for each pinned package at <base>, or dependency it
+#_#   records, whose exact version is not in <repo>/All.
+#_#   The format is <package> <missing name-version>.
+#_#   Fail when any is missing.
 #_#
 do_check() {
   test $# -eq 2 || usage "$0 check <base> <repo>"
   _repo check "${2%/}"
   _tmp
   _setup "${1%/}"
-  _check "${2%/}"
+  catch "$0: fatal:" _missing "${2%/}" > "${tmp}/missing" || exit
+  cat "${tmp}/missing"
+  test -s "${tmp}/missing" && barf "${2%/}: missing packages"
+  return 0
 }
 
 # _export origin commit
@@ -213,17 +192,14 @@ _repin() {
   ' "${tmp}/changes" "${tmp}/pins"
 }
 
-#_# pin <base> <repo>
+#_# pin <base>
 #_#   Replace each pinned port whose commit differs from <base> with the
 #_#   port at that commit, update PINS, and print each as list does.
-#_#   Fail, changing nothing, when check fails.
 #_#
 do_pin() {
-  test $# -eq 2 || usage "$0 pin <base> <repo>"
-  _repo pin "${2%/}"
+  test $# -eq 1 || usage "$0 pin <base>"
   _tmp
   _setup "${1%/}"
-  _check "${2%/}"
   catch "$0: fatal:" _changes > "${tmp}/changes" || exit
   test -s "${tmp}/changes" || return 0
   local origin old new commit
@@ -256,10 +232,6 @@ top="$(cd "$(dirname "$0")/.." && pwd)" || barf "cannot find overlay top"
 #_#   PORTS_GIT, fetching each missing commit from its origin remote.
 #_#
 : "${PORTS_GIT:=/usr/ports}"
-#_# LIBDIRS="/lib /usr/lib"
-#_#   Take the shared libraries in the space-separated LIBDIRS as base.
-#_#
-: "${LIBDIRS:=/lib /usr/lib}"
 
 #### main
 
